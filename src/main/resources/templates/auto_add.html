@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Auto</title>
+</head>
+<body>
+<form action="#" th:action="@{/save}" th:object="${auto}" method="POST">
+    <label for="autoCost">Cost: </label><br>
+    <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto mark" value=""/><br>
+    <label for="autoYear">Year: </label><br>
+    <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year" value=""/><br>
+    <label for="autoMark">Mark: </label><br>
+    <select name="mark" id="autoMark">
+        <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
+        </option>
+    </select><br>
+    <label for="model">Model: </label><br>
+    <select name="model" id="model">
+        <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.model_name}">
+        </option>
+    </select><br>
+    <input type="submit" value="Add Auto!"></input>
+</form>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        let mark_id = document.getElementById("autoMark").value;
+        $.ajax({
+            type: "POST",
+            url: '/add',
+            data : {
+                mark_id : mark_id,
+            },
+            success : function (data) {
+                console.log(1);
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

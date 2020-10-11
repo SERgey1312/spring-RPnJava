@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>All Autos</h1>
+<table>
+    <tr>
+        <th>Cost</th>
+        <th>Year</th>
+        <th>Mark</th>
+        <th>Model</th>
+        <th style="column-span: 2">movies</th>
+    </tr>
+    <tr th:each="auto : ${autoList}">
+        <td th:text="${auto.cost}"></td>
+        <td th:text="${auto.year}"></td>
+        <td th:text="${auto.mark}"></td>
+        <td th:text="${auto.model}"></td>
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+    </tr>
+</table>
+<div>
+    <a href="/add">Add new auto</a>
+</div>
+</body>
+</html>
