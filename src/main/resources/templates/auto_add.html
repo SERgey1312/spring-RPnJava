@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <th:block th:insert="head_default.html"></th:block>
     <title>Add Auto</title>
 </head>
+<header th:replace="header_admin.html :: header"></header>
 <body>
 <form action="#" th:action="@{/save}" th:object="${auto}" method="POST">
     <label for="autoMark">Mark: </label><br>
@@ -29,30 +29,7 @@
     <input type="submit" value="Add Auto!"></input>
 </form>
 <a href="/adding">Add new mark, model or body</a>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
-<script>
-        let markSelect = document.getElementById("autoMark");
-        let modelSelect = document.getElementById("model");
-        let allModels = modelSelect.children;
-
-        for (let i = 0; i < allModels.length; i++){
-            if (allModels[i].className !== markSelect.value){
-                allModels[i].style.display = "none";
-            } else {
-                allModels[i].style.display = "block";
-            }
-        }
-        markSelect.addEventListener("click", function (){
-            for (let i = 0; i < allModels.length; i++){
-                if (allModels[i].className !== markSelect.value){
-                    allModels[i].style.display = "none";
-                } else {
-                    allModels[i].style.display = "block";
-                    modelSelect.value = allModels[i].value;
-                }
-            }
-        })
-</script>
+<th:block th:insert="bootstrapjs.html"></th:block>
+<script src="../static/js/modelsDependMark.js" th:src="@{/js/modelsDependMark.js}"></script>
 </body>
 </html>

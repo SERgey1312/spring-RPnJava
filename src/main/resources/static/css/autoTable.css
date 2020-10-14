@@ -1,0 +1,42 @@
+td {
+    border:  1px solid gray;
+    padding: 8px;
+    text-align: center;
+    width: 10%;
+}
+.th{
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    width: 8%;
+}
+.tdn, .thn {
+    width: 2%;
+    font-weight: bold;
+}
+
+.thn {
+    border: none;
+}
+
+.moviesWithAuto{
+    border: none;
+    width: 8%;
+}
+.deleteBtn{
+    font-weight: bold;
+    color:red;
+}
+.mainTitle{
+    text-align: center;
+    margin-top: 20px;
+}
+table{
+    width: 80%;
+    margin: 0 auto;
+}
+.addAutoLink{
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}

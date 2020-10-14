@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <th:block th:insert="head_default.html"></th:block>
+    <link rel="stylesheet" href="../static/css/addMarkModelBodyStyle.css" th:href="@{/css/addMarkModelBodyStyle.css}">
     <title>Adding</title>
 </head>
+<header th:replace="header_admin.html :: header"></header>
 <body>
-<h1 style="text-align: center">Add new mark, model or body</h1>
-<div style="width: 50%; margin: 0 auto; text-align: center">
+<h1 class="titleStr">Add new mark, model or body</h1>
+<div class="containerWithFields">
+    <hr>
     <div>
         <h3>Mark adding</h3>
         <form action="#" th:action="@{/addingmark}" method="post">
@@ -41,7 +43,6 @@
         </form>
     </div>
 </div>
-
-
+<th:block th:insert="bootstrapjs.html"></th:block>
 </body>
 </html>

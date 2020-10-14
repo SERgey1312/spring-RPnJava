@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <th:block th:insert="head_default.html"></th:block>
     <title>Update</title>
 </head>
+<header th:replace="header_admin.html :: header"></header>
 <body>
-<h1>Edit auto</h1>
+<h1 style="margin-top: 20px">Edit auto</h1>
 <form action="#" th:action="@{/update}" th:object="${auto}" method="POST">
     <input type="hidden" name="id" th:value="${auto.id}">
     <label for="autoMark">Mark: </label><br>
@@ -28,32 +28,9 @@
     <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto cost"/><br>
     <label for="autoYear">Year: </label><br>
     <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year"/><br>
-    <input type="submit" value="Edit Auto!"></input>
+    <input type="submit" value="Edit Auto!">
 </form>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
-<script>
-    let markSelect = document.getElementById("autoMark");
-    let modelSelect = document.getElementById("model");
-    let allModels = modelSelect.children;
-
-    for (let i = 0; i < allModels.length; i++){
-        if (allModels[i].className !== markSelect.value){
-            allModels[i].style.display = "none";
-        } else {
-            allModels[i].style.display = "block";
-        }
-    }
-    markSelect.addEventListener("click", function (){
-        for (let i = 0; i < allModels.length; i++){
-            if (allModels[i].className !== markSelect.value){
-                allModels[i].style.display = "none";
-            } else {
-                allModels[i].style.display = "block";
-                modelSelect.value = allModels[i].value;
-            }
-        }
-    })
-</script>
+<th:block th:insert="bootstrapjs.html"></th:block>
+<script src="../static/js/modelsDependMark.js" th:src="@{/js/modelsDependMark.js}"></script>
 </body>
 </html>
