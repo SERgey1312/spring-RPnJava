@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <th:block th:insert="head_default.html"></th:block>
+    <title>Home</title>
+</head>
+<header th:replace="header_admin.html :: header"></header>
+<body>
+<h1 style="text-align: center; margin:0 auto">HOME</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<th:block th:insert="bootstrapjs.html"></th:block>
+</body>
+</html>

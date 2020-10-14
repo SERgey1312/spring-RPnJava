@@ -6,7 +6,7 @@
 </head>
 <header th:replace="header_admin.html :: header"></header>
 <body>
-<form action="#" th:action="@{/save}" th:object="${auto}" method="POST">
+<form action="#" th:action="@{/admin/save}" th:object="${auto}" method="POST">
     <label for="autoMark">Mark: </label><br>
     <select name="mark" id="autoMark">
         <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
@@ -28,7 +28,7 @@
     <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year" value=""/><br>
     <input type="submit" value="Add Auto!"></input>
 </form>
-<a href="/adding">Add new mark, model or body</a>
+<a href="/admin/adding">Add new mark, model or body</a>
 <th:block th:insert="bootstrapjs.html"></th:block>
 <script src="../static/js/modelsDependMark.js" th:src="@{/js/modelsDependMark.js}"></script>
 </body>

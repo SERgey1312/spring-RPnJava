@@ -7,7 +7,7 @@
 <header th:replace="header_admin.html :: header"></header>
 <body>
 <h1 style="margin-top: 20px">Edit auto</h1>
-<form action="#" th:action="@{/update}" th:object="${auto}" method="POST">
+<form action="#" th:action="@{/admin/update}" th:object="${auto}" method="POST">
     <input type="hidden" name="id" th:value="${auto.id}">
     <label for="autoMark">Mark: </label><br>
     <select name="mark" id="autoMark" th:field = "*{mark}">

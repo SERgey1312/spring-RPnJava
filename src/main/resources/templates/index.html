@@ -25,12 +25,12 @@
             <td th:text="${auto.body.body_name}"></td>
             <td th:text="${auto.cost}" class="autoCost"></td>
             <td th:text="${auto.year}" class="autoYear"></td>
-            <td><a th:href="@{/update/{id}(id = ${auto.id})}">Update</a></td>
-            <td><a th:href="@{/delete/{id}(id = ${auto.id})}" class="deleteBtn">Delete</a></td>
+            <td><a th:href="@{/admin/update/{id}(id = ${auto.id})}">Update</a></td>
+            <td><a th:href="@{/admin/delete/{id}(id = ${auto.id})}" class="deleteBtn">Delete</a></td>
         </tr>
     </table>
     <div class="addAutoLink">
-        <a href="/add">Add new auto</a>
+        <a href="/admin/add">Add new auto</a>
     </div>
 </div>
 <th:block th:insert="bootstrapjs.html"></th:block>

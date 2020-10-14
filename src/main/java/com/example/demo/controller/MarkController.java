@@ -12,9 +12,9 @@ public class MarkController {
     @Autowired
     private MarkService markService;
 
-    @PostMapping("/addingmark")
+    @PostMapping("/admin/addingmark")
     public String saveNewMark(@RequestParam(value = "addmark") String nameOfNewMArk){
         markService.saveMark(nameOfNewMArk);
-        return "redirect:/add";
+        return "redirect:/admin/add";
     }
 }

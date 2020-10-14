@@ -15,13 +15,18 @@ public class MainController {
     private AutoService autoService;
 
     @GetMapping("/")
-    public String getHomePage(org.springframework.ui.Model model){
+    public String getHomePage(){
+        return "homepage";
+    }
+
+    @GetMapping("/admin")
+    public String getAdminPage(org.springframework.ui.Model model){
         model.addAttribute("autoList", autoService.getAllAuto());
         model.addAttribute("order",true);
         return "index";
     }
 
-    @GetMapping("/adding")
+    @GetMapping("/admin/adding")
     public String addMarkModelOrBody(org.springframework.ui.Model model){
         model.addAttribute("marks", markService.getAllMark());
         return "add_some";

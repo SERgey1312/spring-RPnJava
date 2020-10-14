@@ -12,7 +12,7 @@
     <hr>
     <div>
         <h3>Mark adding</h3>
-        <form action="#" th:action="@{/addingmark}" method="post">
+        <form action="#" th:action="@{/admin/addingmark}" method="post">
             <label for="addingNewMArk">New mark name:</label>
             <input type="text" placeholder="Input name of new mark" name="addmark" id="addingNewMArk">
             <input type="submit" value="save">
@@ -21,7 +21,7 @@
     <hr>
     <div>
         <h3>Model adding</h3>
-        <form action="#" th:action="@{/addingmodel}" method="post">
+        <form action="#" th:action="@{/admin/addingmodel}" method="post">
             <label for="autoMark">Choose mark:</label>
             <select name="mark" id="autoMark">
                 <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
@@ -36,7 +36,7 @@
     <hr>
     <div>
         <h3>Body adding</h3>
-        <form action="#" th:action="@{/addingbody}" method="post">
+        <form action="#" th:action="@{/admin/addingbody}" method="post">
             <label for="newBodyName">New body name:</label>
             <input type="text" id="newBodyName" placeholder="Input new name of body" name="addbody">
             <input type="submit" value="save">

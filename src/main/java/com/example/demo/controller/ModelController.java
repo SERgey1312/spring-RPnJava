@@ -13,12 +13,12 @@ public class ModelController {
     @Autowired
     private ModelService modelService;
 
-    @PostMapping("/addingmodel")
+    @PostMapping("/admin/addingmodel")
     public String saveNewModel(@RequestParam(value = "addmodel") String nameOfNewModel,
                                @RequestParam(value = "mark") Mark mark
     ){
         modelService.saveNewModel(nameOfNewModel, mark);
-        return "redirect:/add";
+        return "redirect:/admin/add";
     }
 
 }

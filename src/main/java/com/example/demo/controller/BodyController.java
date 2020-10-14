@@ -12,10 +12,10 @@ public class BodyController {
     @Autowired
     private BodyService bodyService;
 
-    @PostMapping("/addingbody")
+    @PostMapping("/admin/addingbody")
     public String saveNewBody(@RequestParam(value = "addbody") String nameOfBody){
         bodyService.saveBody(nameOfBody);
-        return "redirect:/add";
+        return "redirect:/admin/add";
     }
 
 }

@@ -24,7 +24,7 @@ public class AutoController {
     @Autowired
     private BodyService bodyService;
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String addAuto(org.springframework.ui.Model model) {
         Auto auto = new Auto();
         model.addAttribute("auto", auto);
@@ -34,20 +34,20 @@ public class AutoController {
         return "auto_add";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String saveAuto(@ModelAttribute("auto") Auto auto,
                            @RequestParam("mark") Mark mark) {
         autoService.saveAuto(auto, mark);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteAuto(@PathVariable(value = "id") long id){
         autoService.deleteAutoById(id);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/update/{id}")
+    @GetMapping("/admin/update/{id}")
     public String updateAuto(@PathVariable(value = "id") long id, org.springframework.ui.Model model){
         Auto auto =  autoService.getAutoById(id);
         model.addAttribute("auto", auto);
@@ -58,7 +58,7 @@ public class AutoController {
         return "auto_update";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/admin/update")
     public String updateOneAuto(@RequestParam(value = "id") long id,
                                 @RequestParam(value = "mark") Mark mark,
                                 @RequestParam(value = "model") Model model,
@@ -73,7 +73,7 @@ public class AutoController {
         auto.setBody(body);
         auto.setModel(model);
         autoService.saveAuto(auto, auto.getMark());
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
 }
