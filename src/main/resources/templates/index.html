@@ -13,15 +13,17 @@
         <th>Year</th>
         <th>Mark</th>
         <th>Model</th>
+        <th>Body</th>
         <th style="column-span: 2">movies</th>
     </tr>
     <tr th:each="auto : ${autoList}">
         <td th:text="${auto.cost}"></td>
         <td th:text="${auto.year}"></td>
-        <td th:text="${auto.mark}"></td>
-        <td th:text="${auto.model}"></td>
-        <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
+        <td th:text="${auto.mark.mark_name}"></td>
+        <td th:text="${auto.model.model_name}"></td>
+        <td th:text="${auto.body.body_name}"></td>
+        <td><a th:href="@{/update/{id}(id = ${auto.id})}">Update</a></td>
+        <td><a th:href="@{/delete/{id}(id = ${auto.id})}">Delete</a></td>
     </tr>
 </table>
 <div>

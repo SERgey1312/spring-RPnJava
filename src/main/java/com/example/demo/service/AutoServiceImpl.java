@@ -29,5 +29,10 @@ public class AutoServiceImpl implements AutoService {
     public void deleteAutoById(long id){ autoRepository.deleteById(id);
     }
 
+    @Override
+    public Auto getAutoById(long id){
+        return autoRepository.getOne(id);
+    }
+
 }
 

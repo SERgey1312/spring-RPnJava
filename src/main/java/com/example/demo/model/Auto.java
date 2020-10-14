@@ -11,7 +11,7 @@ public class Auto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @ManyToOne()
     @JoinColumn(name = "mark")
@@ -20,15 +20,15 @@ public class Auto {
     @ManyToOne()
     @JoinColumn(name = "model")
     private Model model;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "body_id")
-//    private Body body;
+
+    @ManyToOne()
+    @JoinColumn(name = "body")
+    private Body body;
 
     private int year;
     private int cost;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -36,29 +36,29 @@ public class Auto {
         this.id = id;
     }
 
-    public String getMark() {
-        return mark.getMark_name();
+    public Mark getMark() {
+        return mark;
     }
 
     public void setMark(Mark mark) {
         this.mark = mark;
     }
 
-    public String getModel() {
-        return model.getModel_name();
+    public Model getModel() {
+        return model;
     }
 
     public void setModel(Model model) {
         this.model = model;
     }
 
-//    public Body getBody() {
-//        return body;
-//    }
-//
-//    public void setBody(Body body) {
-//        this.body = body;
-//    }
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
 
     public int getYear() {
         return year;

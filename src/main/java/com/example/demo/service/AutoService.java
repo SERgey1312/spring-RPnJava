@@ -9,4 +9,5 @@ public interface AutoService {
     List<Auto> getAllAuto();
     void saveAuto(Auto auto, Mark mark);
     void deleteAutoById(long id);
+    Auto getAutoById(long id);
 }

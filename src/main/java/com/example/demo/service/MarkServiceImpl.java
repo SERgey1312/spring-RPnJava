@@ -16,4 +16,11 @@ public class MarkServiceImpl implements MarkService {
     public List<Mark> getAllMark() {
         return markRepository.findAll();
     }
+
+    @Override
+    public void saveMark(String str) {
+        Mark mark = new Mark();
+        mark.setMark_name(str);
+        markRepository.save(mark);
+    }
 }

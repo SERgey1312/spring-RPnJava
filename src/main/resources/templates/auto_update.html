@@ -3,56 +3,57 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Add Auto</title>
+    <title>Update</title>
 </head>
 <body>
-<form action="#" th:action="@{/save}" th:object="${auto}" method="POST">
+<h1>Edit auto</h1>
+<form action="#" th:action="@{/update}" th:object="${auto}" method="POST">
+    <input type="hidden" name="id" th:value="${auto.id}">
     <label for="autoMark">Mark: </label><br>
-    <select name="mark" id="autoMark">
+    <select name="mark" id="autoMark" th:field = "*{mark}">
         <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
         </option>
     </select><br>
     <label for="model">Model: </label><br>
-    <select name="model" id="model">
+    <select name="model" id="model" th:field="*{model}">
         <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.model_name}" th:class="${model.mark.id}">
         </option>
     </select><br>
     <label for="model">Body: </label><br>
-    <select name="body" id="body">
+    <select name="body" id="body" th:field="*{body}">
         <option th:each="body : ${bodys}" th:value="${body.id}" th:text="${body.body_name}">
         </option>
     </select><br>
     <label for="autoCost">Cost: </label><br>
-    <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto cost" value=""/><br>
+    <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto cost"/><br>
     <label for="autoYear">Year: </label><br>
-    <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year" value=""/><br>
-    <input type="submit" value="Add Auto!"></input>
+    <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year"/><br>
+    <input type="submit" value="Edit Auto!"></input>
 </form>
-<a href="/adding">Add new mark, model or body</a>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
 <script>
-        let markSelect = document.getElementById("autoMark");
-        let modelSelect = document.getElementById("model");
-        let allModels = modelSelect.children;
+    let markSelect = document.getElementById("autoMark");
+    let modelSelect = document.getElementById("model");
+    let allModels = modelSelect.children;
 
+    for (let i = 0; i < allModels.length; i++){
+        if (allModels[i].className !== markSelect.value){
+            allModels[i].style.display = "none";
+        } else {
+            allModels[i].style.display = "block";
+        }
+    }
+    markSelect.addEventListener("click", function (){
         for (let i = 0; i < allModels.length; i++){
             if (allModels[i].className !== markSelect.value){
                 allModels[i].style.display = "none";
             } else {
                 allModels[i].style.display = "block";
+                modelSelect.value = allModels[i].value;
             }
         }
-        markSelect.addEventListener("click", function (){
-            for (let i = 0; i < allModels.length; i++){
-                if (allModels[i].className !== markSelect.value){
-                    allModels[i].style.display = "none";
-                } else {
-                    allModels[i].style.display = "block";
-                    modelSelect.value = allModels[i].value;
-                }
-            }
-        })
+    })
 </script>
 </body>
 </html>

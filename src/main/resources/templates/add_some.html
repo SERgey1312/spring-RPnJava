@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding</title>
+</head>
+<body>
+<h1 style="text-align: center">Add new mark, model or body</h1>
+<div style="width: 50%; margin: 0 auto; text-align: center">
+    <div>
+        <h3>Mark adding</h3>
+        <form action="#" th:action="@{/addingmark}" method="post">
+            <label for="addingNewMArk">New mark name:</label>
+            <input type="text" placeholder="Input name of new mark" name="addmark" id="addingNewMArk">
+            <input type="submit" value="save">
+        </form>
+    </div>
+    <hr>
+    <div>
+        <h3>Model adding</h3>
+        <form action="#" th:action="@{/addingmodel}" method="post">
+            <label for="autoMark">Choose mark:</label>
+            <select name="mark" id="autoMark">
+                <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
+                </option>
+            </select>
+            <br>
+            <label for="newModelName">New model name:</label>
+            <input type="text" id="newModelName" placeholder="Input new name for model" name="addmodel">
+            <input type="submit" value="save">
+        </form>
+    </div>
+    <hr>
+    <div>
+        <h3>Body adding</h3>
+        <form action="#" th:action="@{/addingbody}" method="post">
+            <label for="newBodyName">New body name:</label>
+            <input type="text" id="newBodyName" placeholder="Input new name of body" name="addbody">
+            <input type="submit" value="save">
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
