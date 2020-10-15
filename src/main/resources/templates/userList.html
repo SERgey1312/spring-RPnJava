@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="head_default.html"></th:block>
+    <title>Users</title>
+</head>
+<header th:replace="header_admin.html :: header"></header>
+<body>
+<div style="margin-top: 25px">
+    <h1 style="text-align: center; margin: 0 auto">Table with users</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.roles}"></td>
+            <td><a th:href="@{/admin/user/{id}(id = ${user.id})}">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<th:block th:insert="bootstrapjs.html"></th:block>
+</body>
+</html>

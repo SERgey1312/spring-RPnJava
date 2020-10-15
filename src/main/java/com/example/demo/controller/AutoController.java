@@ -9,10 +9,12 @@ import com.example.demo.service.BodyService;
 import com.example.demo.service.MarkService;
 import com.example.demo.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+
 public class AutoController {
 
     @Autowired
@@ -25,6 +27,7 @@ public class AutoController {
     private BodyService bodyService;
 
     @GetMapping("/admin/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addAuto(org.springframework.ui.Model model) {
         Auto auto = new Auto();
         model.addAttribute("auto", auto);
@@ -35,6 +38,7 @@ public class AutoController {
     }
 
     @PostMapping("/admin/save")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveAuto(@ModelAttribute("auto") Auto auto,
                            @RequestParam("mark") Mark mark) {
         autoService.saveAuto(auto, mark);
@@ -42,12 +46,14 @@ public class AutoController {
     }
 
     @GetMapping("/admin/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteAuto(@PathVariable(value = "id") long id){
         autoService.deleteAutoById(id);
         return "redirect:/admin";
     }
 
     @GetMapping("/admin/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String updateAuto(@PathVariable(value = "id") long id, org.springframework.ui.Model model){
         Auto auto =  autoService.getAutoById(id);
         model.addAttribute("auto", auto);
@@ -59,6 +65,7 @@ public class AutoController {
     }
 
     @PostMapping("/admin/update")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String updateOneAuto(@RequestParam(value = "id") long id,
                                 @RequestParam(value = "mark") Mark mark,
                                 @RequestParam(value = "model") Model model,

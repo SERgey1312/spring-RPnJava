@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="head_default.html"></th:block>
+    <title>Edit User</title>
+</head>
+<header th:replace="header_admin.html :: header"></header>
+<body>
+<div>
+    <form action="#" th:action="@{/admin/user}" th:object="${useR}" method="POST">
+        <input type="hidden" name="id" th:value="${useR.id}">
+        <input type="text" name="username" th:value="${useR.username}">
+        <select id="role" th:field = "*{roles}">
+            <option th:each="role : ${roles}" th:value="${role.name()}" th:text="${role}"></option>
+        </select>
+        <button type="submit">save</button>
+    </form>
+</div>
+<th:block th:insert="bootstrapjs.html"></th:block>
+</body>
+</html>
