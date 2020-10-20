@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example </title>
+    <th:block th:insert="head_default.html"></th:block>
+    <title>Join us</title>
 </head>
 <body>
 <div th:if="${param.error}">
@@ -14,11 +15,28 @@
 <div th:if="${param.message}">
     User exists!
 </div>
-Add new user
-<form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+<div sec:authorize="isAuthenticated()" style="text-align: center;margin-top: 15px">
+    <form th:action="@{/logout}" method="post">
+        <a>You are logged in as </a>
+        <a th:text="${#authentication.name}"></a>
+        <input class="btn btn-danger" type="submit" value="Log out">
+    </form>
+</div>
+<div th:text="${message}" style="text-align: center; color: red"></div>
+<form th:action="@{/registration}" method="post" style="text-align: center">
+    <h3>Join us!</h3>
+    <label for="usernameId" style="display: block">User name:</label>
+    <input type="text" name="username" id="usernameId" placeholder="login" style="width: 300px" required/>
+    <label for="passId" style="display: block">Password: </label>
+    <input type="password" name="password" id="passId" placeholder="password" style="width: 300px" required/>
+    <label for="passIdRep" style="display: block">Repeat password: </label>
+    <input type="password" name="passwordRep" id="passIdRep" placeholder="repeat password" style="width: 300px" required/>
+    <div style="margin-top: 25px"><input type="submit" value="Join us" class="btn btn-outline-dark my-2 my-sm-0"/></div>
+    <hr style="margin: 0 auto; text-align: center; width: 20%; margin-top: 10px; margin-bottom: 10px">
+   <div style="text-align: center">
+        <a href="/login">Log in</a>
+   </div>
 </form>
+<th:block th:insert="bootstrapjs.html"></th:block>
 </body>
 </html>

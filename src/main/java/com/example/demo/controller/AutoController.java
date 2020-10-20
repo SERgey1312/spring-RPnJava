@@ -1,13 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Auto;
-import com.example.demo.model.Body;
-import com.example.demo.model.Mark;
-import com.example.demo.model.Model;
-import com.example.demo.service.AutoService;
-import com.example.demo.service.BodyService;
-import com.example.demo.service.MarkService;
-import com.example.demo.service.ModelService;
+import com.example.demo.model.*;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -25,6 +19,10 @@ public class AutoController {
     private ModelService modelService;
     @Autowired
     private BodyService bodyService;
+    @Autowired
+    private TransmissionService transmissionService;
+    @Autowired
+    private MotorService motorService;
 
     @GetMapping("/admin/add")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -34,6 +32,8 @@ public class AutoController {
         model.addAttribute("marks", markService.getAllMark());
         model.addAttribute("models", modelService.getAllModel());
         model.addAttribute("bodys", bodyService.getAllBody());
+        model.addAttribute("motors", motorService.getAllMotor());
+        model.addAttribute("transmissions", transmissionService.getAllTransmission());
         return "auto_add";
     }
 
@@ -42,14 +42,14 @@ public class AutoController {
     public String saveAuto(@ModelAttribute("auto") Auto auto,
                            @RequestParam("mark") Mark mark) {
         autoService.saveAuto(auto, mark);
-        return "redirect:/admin";
+        return "redirect:/admin/auto";
     }
 
     @GetMapping("/admin/delete/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteAuto(@PathVariable(value = "id") long id){
         autoService.deleteAutoById(id);
-        return "redirect:/admin";
+        return "redirect:/admin/auto";
     }
 
     @GetMapping("/admin/update/{id}")
@@ -60,6 +60,8 @@ public class AutoController {
         model.addAttribute("marks", markService.getAllMark());
         model.addAttribute("models", modelService.getAllModel());
         model.addAttribute("bodys", bodyService.getAllBody());
+        model.addAttribute("transmissions", transmissionService.getAllTransmission());
+        model.addAttribute("motors", motorService.getAllMotor());
         model.addAttribute("marka", auto.getMark());
         return "auto_update";
     }
@@ -71,16 +73,22 @@ public class AutoController {
                                 @RequestParam(value = "model") Model model,
                                 @RequestParam(value = "cost") int cost,
                                 @RequestParam(value = "year") int year,
-                                @RequestParam(value = "body") Body body
-    ){
+                                @RequestParam(value = "body") Body body,
+                                @RequestParam(value = "photo_link") String photoLink,
+                                @RequestParam(value = "motor") Motor motor,
+                                @RequestParam(value = "transmission") Transmission transmission
+                                ){
         Auto auto = autoService.getAutoById(id);
         auto.setMark(mark);
         auto.setYear(year);
         auto.setCost(cost);
         auto.setBody(body);
         auto.setModel(model);
+        auto.setPhoto_link(photoLink);
+        auto.setMotor(motor);
+        auto.setTransmission(transmission);
         autoService.saveAuto(auto, auto.getMark());
-        return "redirect:/admin";
+        return "redirect:/admin/auto";
     }
 
 }

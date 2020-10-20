@@ -13,6 +13,8 @@ public class Auto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String photo_link;
+
     @ManyToOne()
     @JoinColumn(name = "mark")
     private Mark mark;
@@ -25,8 +27,36 @@ public class Auto {
     @JoinColumn(name = "body")
     private Body body;
 
+    @ManyToOne()
+    @JoinColumn(name = "transmission")
+    private Transmission transmission;
+
+    @ManyToOne()
+    @JoinColumn(name = "motor")
+    private Motor motor;
+
     private int year;
     private int cost;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Transmission getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(Transmission transmission) {
+        this.transmission = transmission;
+    }
+
+    public Motor getMotor() {
+        return motor;
+    }
+
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
 
     public long getId() {
         return id;
@@ -74,5 +104,13 @@ public class Auto {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public String getPhoto_link() {
+        return photo_link;
+    }
+
+    public void setPhoto_link(String photo_link) {
+        this.photo_link = photo_link;
     }
 }

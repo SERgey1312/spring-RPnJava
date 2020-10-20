@@ -7,35 +7,56 @@
 <header th:replace="header_admin.html :: header"></header>
 <body>
 <h1 class="mainTitle">All Autos</h1>
-<div class="containerr">
-    <table>
-        <tr>
-            <td class="thn">num.</td>
-            <td class="th">Mark</td>
-            <td class="th">Model</td>
-            <td class="th">Body</td>
-            <td class="th">Cost</td>
-            <td class="th">Year</td>
-            <td class="moviesWithAuto"></td>
-        </tr>
-        <tr th:each="auto : ${autoList}">
-            <td th:text="${auto.id}" class="tdn"></td>
-            <td th:text="${auto.mark.mark_name}"></td>
-            <td th:text="${auto.model.model_name}"></td>
-            <td th:text="${auto.body.body_name}"></td>
-            <td th:text="${auto.cost}" class="autoCost"></td>
-            <td th:text="${auto.year}" class="autoYear"></td>
-            <td><a th:href="@{/admin/update/{id}(id = ${auto.id})}">Update</a></td>
-            <td><a th:href="@{/admin/delete/{id}(id = ${auto.id})}" class="deleteBtn">Delete</a></td>
-        </tr>
-    </table>
-    <div class="addAutoLink">
-        <a href="/admin/add">Add new auto</a>
+<div class="filterForm">
+    <form action="#" th:action="@{/admin/auto}" method="get">
+        <label for="autoMark">mark:</label>
+        <select id="autoMark" name="mark" >
+            <option value=""></option>
+            <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}" th:selected="${currentMark} == ${mark}? 'selected'">
+            </option>
+        </select>
+        <label for="model">Model:</label>
+        <select id="model" name="model" disabled>
+            <option value=""></option>
+            <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.model_name}" th:class="${model.mark.id}" th:selected="${currentModel} == ${model}? 'selected'">
+            </option>
+        </select>
+        <input type="submit" class="btn btn-outline-dark my-2 my-sm-0" value="search">
+    <div class="containerr">
+        <table>
+            <tr>
+                <td class="thn">num.</td>
+                <td class="th">Mark</td>
+                <td class="th">Model</td>
+                <td class="th">Body</td>
+                <td class="th"><button type="submit" th:value="${sortPrice} == 'DSC'? 'ASC' : 'DSC'" name="sortPrice" class="priceSortBtn">Price ↑↓</button></td>
+                <td class="th"><button type="submit" th:value="${sortYear} == 'DSC'? 'ASC' : 'DSC'" name="sortYear" class="priceSortBtn">Year ↑↓</button></td>
+                <td class="th">Motor</td>
+                <td class="th">Trans.</td>
+                <td class="moviesWithAuto"></td>
+                <td class="moviesWithAuto"></td>
+            </tr>
+            <tr th:each="auto : ${autoList}">
+                <td th:text="${auto.id}" class="tdn"></td>
+                <td th:text="${auto.mark.mark_name}"></td>
+                <td th:text="${auto.model.model_name}"></td>
+                <td th:text="${auto.body.body_name}"></td>
+                <td th:text="${auto.cost}" class="autoCost"></td>
+                <td th:text="${auto.year}" class="autoYear"></td>
+                <td th:text="${auto.motor.motor_type}" class="autoMotor"></td>
+                <td th:text="${auto.transmission.transmission_type}" class="autoTransmission"></td>
+                <td><a th:href="@{/admin/update/{id}(id = ${auto.id})}">Update</a></td>
+                <td><a th:href="@{/admin/delete/{id}(id = ${auto.id})}" class="deleteBtn">Delete</a></td>
+            </tr>
+        </table>
+        <div class="addAutoLink">
+            <a href="/admin/add">Add new auto</a>
+        </div>
     </div>
+    </form>
 </div>
 <th:block th:insert="bootstrapjs.html"></th:block>
-<script src="../static/js/addTextToCeil.js" th:src="@{/js/addTextToCeil.js}">
-
-</script>
+<script src="../static/js/addTextToCeil.js" th:src="@{/js/addTextToCeil.js}"></script>
+<script src="../static/js/modelsDependMark.js" th:src="@{/js/modelsDependMark.js}"></script>
 </body>
 </html>

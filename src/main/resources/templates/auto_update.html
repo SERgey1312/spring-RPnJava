@@ -2,33 +2,49 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="head_default.html"></th:block>
+    <link rel="stylesheet" href="../static/css/auto_add.css" th:href="@{/css/auto_add.css}">
     <title>Update</title>
 </head>
 <header th:replace="header_admin.html :: header"></header>
 <body>
-<h1 style="margin-top: 20px">Edit auto</h1>
-<form action="#" th:action="@{/admin/update}" th:object="${auto}" method="POST">
+<form action="#" th:action="@{/admin/update}" th:object="${auto}" method="POST" class="mainForm">
+    <h1>Edit auto</h1>
     <input type="hidden" name="id" th:value="${auto.id}">
     <label for="autoMark">Mark: </label><br>
-    <select name="mark" id="autoMark" th:field = "*{mark}">
+    <select name="mark" id="autoMark" th:field = "*{mark}" class="selectCeil">
         <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
         </option>
     </select><br>
     <label for="model">Model: </label><br>
-    <select name="model" id="model" th:field="*{model}">
+    <select name="model" id="model" th:field="*{model}" class="selectCeil">
         <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.model_name}" th:class="${model.mark.id}">
         </option>
     </select><br>
     <label for="model">Body: </label><br>
-    <select name="body" id="body" th:field="*{body}">
+    <select name="body" id="body" th:field="*{body}" class="selectCeil">
         <option th:each="body : ${bodys}" th:value="${body.id}" th:text="${body.body_name}">
         </option>
     </select><br>
     <label for="autoCost">Cost: </label><br>
-    <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto cost"/><br>
+    <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto cost" class="selectCeil"/><br>
     <label for="autoYear">Year: </label><br>
-    <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year"/><br>
-    <input type="submit" value="Edit Auto!">
+    <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year" class="selectCeil"/><br>
+    <label for="photoLink">Photo link: </label> <br>
+    <input id="photoLink" type="text" th:field="*{photo_link}" placeholder="Input photo link" class="selectCeil" ><br>
+
+    <label for="motorType">Motor: </label><br>
+    <select name="motor" id="motorType" th:field="*{motor}" class="selectCeil">
+        <option th:each="motor : ${motors}" th:value="${motor.id}" th:text="${motor.motor_type}">
+        </option>
+    </select><br>
+
+    <label for="transType">Transmission: </label><br>
+    <select name="transmission" id="transType" th:field="*{transmission}" class="selectCeil">
+        <option th:each="trans : ${transmissions}" th:value="${trans.id}" th:text="${trans.transmission_type}">
+        </option>
+    </select><br>
+
+    <input type="submit" value="Edit Auto!" class="btn btn-outline-dark my-2 my-sm-0">
 </form>
 <th:block th:insert="bootstrapjs.html"></th:block>
 <script src="../static/js/modelsDependMark.js" th:src="@{/js/modelsDependMark.js}"></script>

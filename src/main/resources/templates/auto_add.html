@@ -2,33 +2,52 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="head_default.html"></th:block>
+    <link rel="stylesheet" href="../static/css/auto_add.css" th:href="@{/css/auto_add.css}">
     <title>Add Auto</title>
 </head>
 <header th:replace="header_admin.html :: header"></header>
 <body>
-<form action="#" th:action="@{/admin/save}" th:object="${auto}" method="POST">
-    <label for="autoMark">Mark: </label><br>
-    <select name="mark" id="autoMark">
-        <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
-        </option>
-    </select><br>
-    <label for="model">Model: </label><br>
-    <select name="model" id="model">
-        <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.model_name}" th:class="${model.mark.id}">
-        </option>
-    </select><br>
-    <label for="model">Body: </label><br>
-    <select name="body" id="body">
-        <option th:each="body : ${bodys}" th:value="${body.id}" th:text="${body.body_name}">
-        </option>
-    </select><br>
-    <label for="autoCost">Cost: </label><br>
-    <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto cost" value=""/><br>
-    <label for="autoYear">Year: </label><br>
-    <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year" value=""/><br>
-    <input type="submit" value="Add Auto!"></input>
-</form>
-<a href="/admin/adding">Add new mark, model or body</a>
+<div class="mainContainerAddAuto">
+    <form action="#" th:action="@{/admin/save}" th:object="${auto}" method="POST">
+        <label for="autoMark" class="labelAutoMark">Mark: </label><br>
+        <select name="mark" id="autoMark" class="selectCeil">
+            <option th:each="mark : ${marks}" th:value="${mark.id}" th:text="${mark.mark_name}">
+            </option>
+        </select><br>
+        <label for="model">Model: </label><br>
+        <select name="model" id="model" class="selectCeil">
+            <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.model_name}" th:class="${model.mark.id}">
+            </option>
+        </select><br>
+        <label for="body" style="font-weight: bold;">Body: </label><br>
+        <select name="body" id="body" class="selectCeil">
+            <option th:each="body : ${bodys}" th:value="${body.id}" th:text="${body.body_name}">
+            </option>
+        </select><br>
+        <label for="autoCost">Cost: </label><br>
+        <input id="autoCost" type="text" th:field="*{cost}" placeholder="Auto cost" value="" class="selectCeil"/><br>
+        <label for="autoYear" >Year: </label><br>
+        <input id="autoYear" type="text" th:field="*{year}" placeholder="Auto year" value="" class="selectCeil"/><br>
+        <label for="photoLink">Photo link: </label> <br>
+        <input id="photoLink" type="text" th:field="*{photo_link}" placeholder="Input photo link" class="selectCeil"><br>
+
+        <label for="motorType">Motor: </label><br>
+        <select name="motor" id="motorType" class="selectCeil">
+            <option th:each="motor : ${motors}" th:value="${motor.id}" th:text="${motor.motor_type}">
+            </option>
+        </select><br>
+
+        <label for="transType">Transmission: </label><br>
+        <select name="transmission" id="transType" class="selectCeil">
+            <option th:each="trans : ${transmissions}" th:value="${trans.id}" th:text="${trans.transmission_type}">
+            </option>
+        </select><br>
+
+        <input type="submit" value="Add Auto!" class="btn btn-outline-dark my-2 my-sm-0" style="margin-top: 15px">
+    </form>
+    <hr class="hr">
+    <a href="/admin/adding">Add new mark, model or body</a>
+</div>
 <th:block th:insert="bootstrapjs.html"></th:block>
 <script src="../static/js/modelsDependMark.js" th:src="@{/js/modelsDependMark.js}"></script>
 </body>

@@ -20,6 +20,7 @@ td {
 }
 
 .moviesWithAuto{
+    background: none;
     border: none;
     width: 8%;
 }
@@ -39,4 +40,18 @@ table{
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
+}
+.filterForm{
+    text-align: center;
+    margin: 0 auto;
+}
+.priceSortBtn{
+    font-weight: bold;
+    border: none;
+    background:none;
+    color: blue;
+}
+.priceSortBtn:hover{
+    color: darkblue;
+    text-decoration: underline;
 }
