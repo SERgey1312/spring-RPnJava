@@ -1,0 +1,49 @@
+.titleParam{
+    text-align: center;
+    margin:  15px auto;
+}
+.paramForm{
+    text-align: center;
+    margin: 15px auto;
+}
+.titleCatalog{
+    text-align: center;
+    margin: 15px auto;
+}
+.firstHr{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+.autoParameters{
+    display: flex;
+    width: 90%;
+    height: 228px;
+    margin: 13px;
+}
+.autoPhoto{
+    display: block;
+    width: 55%;
+    height: 100%;
+    margin: 0 auto;
+}
+.inCatalogHr{
+    width: 90%;
+    margin: 3px auto;
+    text-align: center;
+}
+.containerForAutoParameters{
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+}
+.markAndModel{
+    display: flex;
+}
+.linkMarkModel{
+    display: block;
+    width: 30%;
+}
+.linkMarkModel:hover{
+    color: firebrick;
+}

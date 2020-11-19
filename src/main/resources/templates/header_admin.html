@@ -16,11 +16,11 @@
                 <li sec:authorize="hasAuthority('ADMIN')">
                     <a class="nav-link" href="/admin/auto">Autos</a>
                 </li>
-                <li>
-                    <a class="nav-link" href="/catalog">Auto catalog</a>
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" href="/admin/orders">Orders</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="/myorders">My orders</a>
+                    <a class="nav-link" href="/catalog">Auto catalog</a>
                 </li>
             </ul>
             <form th:action="@{/logout}" sec:authorize="isAuthenticated()" method="post">

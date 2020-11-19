@@ -33,6 +33,4 @@ public interface AutoRepository extends JpaRepository<Auto,Long> {
     List<Auto> findByMark_IdAndBody_IdAndMotor_IdAndTransmission_Id(long idMark,long idBody,long idMotor, long idTrans);
     List<Auto> findByMark_IdAndModel_IdAndBody_IdAndMotor_IdAndTransmission_Id(long idMark,long idModel,long idBody,long idMotor,long idTrans);
 
-
-
 }

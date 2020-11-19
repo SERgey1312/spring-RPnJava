@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="head_default.html"></th:block>
+    <link rel="stylesheet" href="../static/css/order_table.css" th:href="@{/css/order_table.css}">
+    <title>Orders</title>
+</head>
+<header th:replace="header_admin.html :: header"></header>
+<body>
+<div style="margin-top: 25px">
+    <h1 style="text-align: center; margin: 0 auto">Table with orders</h1>
+    <table>
+        <thead>
+        <tr>
+            <td style="font-weight: bold; border: none;">num.</td>
+            <td style="font-weight: bold; border: none;">Email</td>
+            <td style="font-weight: bold; border: none;">Phone</td>
+            <td style="font-weight: bold; border: none;">Full Name</td>
+            <td style="font-weight: bold; border: none;">Auto</td>
+            <td style="font-weight: bold; border: none;">Date</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.email}"></td>
+            <td th:text="${order.phone}"></td>
+            <td th:text="${order.fName}+' '+${order.lName}"></td>
+            <td><a th:href="@{/catalog/auto/{id}(id = ${order.auto.id})}" th:text="${order.auto.mark.mark_name} + ' ' + ${order.auto.model.model_name}"></a></td>
+            <td th:text="${#dates.format(order.date, 'dd-MM-yyyy HH:mm')}"></td>
+            <td><a style="color: red; font-weight: bold" th:href="@{/admin/order/delete/{id}(id = ${order.id})}">Delete</a> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<th:block th:insert="bootstrapjs.html"></th:block>
+</body>
+<footer th:replace="footer.html ::footer"></footer>
+</html>

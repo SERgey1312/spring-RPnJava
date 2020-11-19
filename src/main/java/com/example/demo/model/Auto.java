@@ -3,6 +3,7 @@ package com.example.demo.model;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -35,8 +36,13 @@ public class Auto {
     @JoinColumn(name = "motor")
     private Motor motor;
 
+    @OneToMany(mappedBy = "auto")
+    private Set<Order> orders;
+
     private int year;
     private int cost;
+    private String color;
+    private long mileage;
 
     public void setId(long id) {
         this.id = id;
@@ -112,5 +118,29 @@ public class Auto {
 
     public void setPhoto_link(String photo_link) {
         this.photo_link = photo_link;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public long getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(long mileage) {
+        this.mileage = mileage;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

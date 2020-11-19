@@ -1,0 +1,32 @@
+.containerForAll{
+    width: 70%;
+    margin: 10px auto;
+}
+.photoAuto{
+    width: 50%;
+}
+.containerAutoDescr{
+    display: flex;
+}
+.photoAutoImg{
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+.autoPrice{
+    font-size: 22px;
+    color: royalblue;
+    font-weight: bold;
+}
+.autoDescr{
+    width: 50%;
+}
+.autoSomeDescr{
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.containerBtns{
+    margin-left: 52px;
+    margin-top: 15px;
+}

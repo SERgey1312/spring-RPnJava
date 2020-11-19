@@ -41,4 +41,7 @@ public interface AutoService {
     List<Auto> getAutoByPriceMin(List<Auto> autoList,int min);
     List<Auto> getAutoByPriceMax(List<Auto> autoList, int max);
     List<Auto> getAutoByPriceBetweenMinMax(List<Auto> autoList, int min, int max);
+    List<Auto> getAutoByYearMin(List<Auto> autoList, int min);
+    List<Auto> getAutoByYearMax(List<Auto> autoList, int max);
+    List<Auto> getAutoByYearMinMax(List<Auto> autoList, int min, int max);
 }

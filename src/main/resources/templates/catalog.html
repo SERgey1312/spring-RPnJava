@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="head_default.html"></th:block>
+    <link rel="stylesheet" href="../static/css/auto_catalog.css" th:href="@{/css/auto_catalog.css}">
     <title>Catalog</title>
 </head>
 <header th:replace="header_admin.html :: header"></header>
 <body>
-<form action="#" th:action="@{/catalog}" style="text-align: center; margin: 15px auto">
+<h3 class="titleParam">Search by parameters:</h3>
+<form action="#" th:action="@{/catalog}" class="paramForm">
     <label for="mark">Mark:</label>
     <select id="mark" name="mark">
         <option th:value="null"></option>
@@ -43,30 +45,39 @@
     </select>
 
     <div>
-        <label>Min price: </label><input type="text" name="minPrice" placeholder="min price" th:value="${currentMinPrice}">
-        <label>Max price: </label><input type="text" name="maxPrice" placeholder="max price" th:value="${currentMaxPrice}">
+        <label>Min price: </label><input pattern="^[ 0-9]+$" type="text" name="minPrice" placeholder="min price" th:value="${currentMinPrice}">
+        <label>Max price: </label><input pattern="^[ 0-9]+$" type="text" name="maxPrice" placeholder="max price" th:value="${currentMaxPrice}">
+    </div>
+    <div>
+        <label>Min year: </label><input pattern="^[ 0-9]+$" type="text" name="minYear" placeholder="min year" th:value="${currentMinYear}">
+        <label>Max year: </label><input pattern="^[ 0-9]+$" type="text" name="maxYear" placeholder="max year" th:value="${currentMaxYear}">
     </div>
     <br>
     <input type="submit" value="Search" class="btn btn-outline-dark my-2 my-sm-0">
 </form>
-<div style="text-align: center; margin: 15px auto">
+<div class="titleCatalog">
     <h3 th:text="'Found ' + ${autoList.size()} + ' autos'"></h3>
+    <br>
+    <h3>Catalog</h3>
+    <hr class="firstHr">
 </div>
 <div th:each="auto : ${autoList}">
     <div th:id="${auto.id}">
-        <div style="display: flex; width: 90%; height: 228px; margin: 13px">
+        <div class="autoParameters">
             <div style="width: 50%">
-                <img th:src="${auto.photo_link}" alt="no, sorry" style="display: block; width: 71%; height: 100%; margin: 0 auto">
+                <a th:href="@{/catalog/auto/{id}(id = ${auto.id})}">
+                    <img th:src="${auto.photo_link}" alt="no, sorry" class="autoPhoto">
+                </a>
             </div>
             <div style="width: 50%">
-                <div class="markAndModel" style="display: flex">
-                    <a style="display: block; width: 30%" href="#">
+                <div class="markAndModel">
+                    <a class="linkMarkModel" th:href="@{/catalog/auto/{id}(id = ${auto.id})}">
                         <span style="font-size: 21px" th:text="${auto.mark.mark_name} + ' ' + ${auto.model.model_name}"></span>
                         <br>
                         <span style="font-size: 21px" th:text="${auto.body.body_name}"></span>
                     </a>
 
-                    <div style="width: 40%; text-align: center; margin: 0 auto">
+                    <div class="containerForAutoParameters">
                         <span th:text="${auto.year} + ' y.'"></span>
                         <br>
                         <span th:text="${auto.motor.motor_type} + ', '"></span>
@@ -78,8 +89,10 @@
                 </div>
             </div>
         </div>
+        <hr class="inCatalogHr">
     </div>
 </div>
 <th:block th:insert="bootstrapjs.html"></th:block>
 </body>
+<footer th:replace="footer.html ::footer"></footer>
 </html>

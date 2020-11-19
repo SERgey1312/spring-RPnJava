@@ -76,7 +76,9 @@ public class AutoController {
                                 @RequestParam(value = "body") Body body,
                                 @RequestParam(value = "photo_link") String photoLink,
                                 @RequestParam(value = "motor") Motor motor,
-                                @RequestParam(value = "transmission") Transmission transmission
+                                @RequestParam(value = "transmission") Transmission transmission,
+                                @RequestParam(value = "color") String color,
+                                @RequestParam(value = "mileage") long mileage
                                 ){
         Auto auto = autoService.getAutoById(id);
         auto.setMark(mark);
@@ -87,6 +89,8 @@ public class AutoController {
         auto.setPhoto_link(photoLink);
         auto.setMotor(motor);
         auto.setTransmission(transmission);
+        auto.setColor(color);
+        auto.setMileage(mileage);
         autoService.saveAuto(auto, auto.getMark());
         return "redirect:/admin/auto";
     }

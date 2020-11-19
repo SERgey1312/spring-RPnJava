@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="head_default.html"></th:block>
+    <link rel="stylesheet" href="../static/css/auto_page.css" th:href="@{/css/auto_page.css}">
+    <title>Auto page</title>
+</head>
+<header th:replace="header_admin.html :: header"></header>
+<body>
+<div class="containerForAll">
+    <h2 th:text="'Sale ' + ${auto.mark.mark_name} + ' ' + ${auto.model.model_name} + ', ' + ${auto.year} + ' y.'"></h2>
+    <hr>
+    <div class="containerAutoDescr">
+        <div class="photoAuto">
+            <img th:src="${auto.photo_link}" alt="no, sorry" class="photoAutoImg">
+        </div>
+        <div class="autoDescr">
+            <div class="autoPrice" th:text="${auto.cost}+' $'"></div>
+            <div class="autoSomeDescr" th:text="${auto.year} +' y. , ' + ${auto.transmission.transmission_type}"></div>
+            <div class="autoSomeDescr" th:text="'Motor : ' + ${auto.motor.motor_type}"></div>
+            <div class="autoSomeDescr" th:text="'Mileage : ' + ${auto.mileage} + ' km'"></div>
+            <div class="autoSomeDescr" th:text="${auto.body.body_name} + ', ' + ${auto.color}"></div>
+        </div>
+    </div>
+    <div class="containerBtns" sec:authorize="!hasAuthority('ADMIN')">
+        <a th:href="@{/catalog/auto/order/{id}(id = ${auto.id})}">
+            <button type="button" class="btn btn-success">Order</button>
+        </a>
+    </div>
+</div>
+
+<th:block th:insert="bootstrapjs.html"></th:block>
+</body>
+<footer th:replace="footer.html ::footer"></footer>
+</html>

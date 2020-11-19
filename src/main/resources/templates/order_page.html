@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="head_default.html"></th:block>
+    <link rel="stylesheet" href="../static/css/order_page.css" th:href="@{/css/order_page.css}">
+    <title>Order page</title>
+</head>
+<header th:replace="header_admin.html :: header"></header>
+<body>
+<h2>Order Info</h2>
+<div class="autoDescr">
+    <hr class="hr">
+    <a class="descrBlock" th:text="${auto.mark.mark_name} + ' ' + ${auto.model.model_name}"></a><br>
+    <a class="descrBlock" th:text="${auto.body.body_name} + ', ' + ${auto.color} + ' ' + ${auto.year} + ' y.'"></a><br>
+    <a class="descrBlock" th:text="${auto.motor.motor_type} + ', ' + ${auto.transmission.transmission_type}"></a><br>
+    <a class="descrBlock" th:text="'Mileage: ' + ${auto.mileage} + ' km'"></a><br>
+    <hr class="hr">
+</div>
+<form method="post" th:action="@{/ordersave}" class="sendForm">
+    <input type="hidden" name="user" th:value="${#authentication.name}">
+    <input type="hidden" name="auto" th:value="${auto.id}">
+    <label for="phone">Your phone:</label><br>
+    <input id="phone" type="text" placeholder="+375-(**)-***-**-**" name="phone" class="inputElement" required><br>
+    <label for="email">Your email:</label><br>
+    <input id="email" type="email" placeholder="example@example.com" name="email" class="inputElement" required><br>
+    <label for="firstName">Your firstname:</label><br>
+    <input type="text" id="firstName" placeholder="firstname" name="firstName" class="inputElement" required><br>
+    <label for="lastName">Your lastname:</label><br>
+    <input type="text" id="lastName" placeholder="lastname" name="lastName" class="inputElement" required><br>
+    <input class="btn btn-success" type="submit" value="Order">
+</form>
+<th:block th:insert="bootstrapjs.html"></th:block>
+</body>
+<footer th:replace="footer.html ::footer"></footer>
+</html>

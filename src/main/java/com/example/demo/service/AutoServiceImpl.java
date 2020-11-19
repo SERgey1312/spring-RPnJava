@@ -209,5 +209,38 @@ public class AutoServiceImpl implements AutoService {
         return autos;
     }
 
+    @Override
+    public List<Auto> getAutoByYearMin(List<Auto> autoList, int min) {
+        List<Auto> autos = new ArrayList<>();
+        for (Auto auto : autoList){
+            if (auto.getYear() > min){
+                autos.add(auto);
+            }
+        }
+        return autos;
+    }
+
+    @Override
+    public List<Auto> getAutoByYearMax(List<Auto> autoList, int max) {
+        List<Auto> autos = new ArrayList<>();
+        for (Auto auto : autoList){
+            if (auto.getYear() < max){
+                autos.add(auto);
+            }
+        }
+        return autos;
+    }
+
+    @Override
+    public List<Auto> getAutoByYearMinMax(List<Auto> autoList, int min, int max) {
+        List<Auto> autos = new ArrayList<>();
+        for (Auto auto : autoList){
+            if (auto.getYear() > min && auto.getYear() <= max){
+                autos.add(auto);
+            }
+        }
+        return autos;
+    }
+
 }
 

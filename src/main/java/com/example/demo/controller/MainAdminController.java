@@ -3,9 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.model.Auto;
 import com.example.demo.model.Mark;
 import com.example.demo.model.Model;
+import com.example.demo.model.Order;
 import com.example.demo.service.AutoService;
 import com.example.demo.service.MarkService;
 import com.example.demo.service.ModelService;
+import com.example.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class MainAdminController {
     private AutoService autoService;
     @Autowired
     ModelService modelService;
+    @Autowired
+    OrderService orderService;
 
     @GetMapping("/")
     public String getHomePage(){
@@ -74,6 +78,21 @@ public class MainAdminController {
     public String addMarkModelOrBody(org.springframework.ui.Model model){
         model.addAttribute("marks", markService.getAllMark());
         return "add_some";
+    }
+
+    @GetMapping("/admin/orders")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String getAllOrders(org.springframework.ui.Model model){
+        List<Order> orders = orderService.getAllOrder();
+        model.addAttribute("orders", orders);
+        return "order_table";
+    }
+
+    @GetMapping("/admin/order/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String deleteOrder(@PathVariable(value = "id") long id){
+        orderService.deleteOrder(id);
+        return "redirect:/admin/orders";
     }
 
 }

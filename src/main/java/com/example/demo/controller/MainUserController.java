@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -25,6 +27,8 @@ public class MainUserController {
     TransmissionService transmissionService;
     @Autowired
     MotorService motorService;
+    @Autowired
+    OrderService orderService;
 
     @GetMapping("/catalog")
     @PreAuthorize("hasAuthority('USER')")
@@ -35,7 +39,9 @@ public class MainUserController {
                                  @RequestParam(value = "transmission", required = false) Transmission transmission,
                                  @RequestParam(value = "motor", required = false) Motor motor,
                                  @RequestParam(value = "minPrice", required = false, defaultValue = "0") int minPrice,
-                                 @RequestParam(value = "maxPrice", required = false, defaultValue = "1000000") int maxPrice
+                                 @RequestParam(value = "maxPrice", required = false, defaultValue = "1000000") int maxPrice,
+                                 @RequestParam(value = "minYear", required = false,defaultValue = "1980") int minYear,
+                                 @RequestParam(value = "maxYear", required = false,defaultValue = "2020") int maxYear
                                  ){
         model.addAttribute("currentMark", mark);
         model.addAttribute("currentModel", autoModel);
@@ -44,6 +50,8 @@ public class MainUserController {
         model.addAttribute("currentMotor", motor);
         model.addAttribute("currentMinPrice", minPrice);
         model.addAttribute("currentMaxPrice", maxPrice);
+        model.addAttribute("currentMinYear", minYear);
+        model.addAttribute("currentMaxYear", maxYear);
         model.addAttribute("marks", markService.getAllMark());
         model.addAttribute("models", modelService.getAllModel());
         model.addAttribute("bodys", bodyService.getAllBody());
@@ -107,9 +115,47 @@ public class MainUserController {
         } else if(minPrice == 0 && maxPrice != 0){
             autoList = autoService.getAutoByPriceMax(autoList, maxPrice);
         }
+
+        if (minYear != 0 && maxYear != 0 ){
+            autoList = autoService.getAutoByYearMinMax(autoList, minYear, maxYear);
+        } else if(minYear != 0 && maxYear == 0){
+            autoList = autoService.getAutoByYearMin(autoList, minYear);
+        } else if(minYear == 0 && maxYear != 0){
+            autoList = autoService.getAutoByYearMax(autoList, maxYear);
+        }
         model.addAttribute("autoList", autoList);
 
 
         return "catalog";
     }
+
+    @GetMapping("/catalog/auto/{id}")
+    @PreAuthorize("hasAuthority('USER')")
+    public String getAutoPage(org.springframework.ui.Model model, @PathVariable(value = "id") long id){
+        Auto auto = autoService.getAutoById(id);
+        model.addAttribute("auto", auto);
+        return "auto_page";
+    }
+
+    @GetMapping("/catalog/auto/order/{id}")
+    @PreAuthorize("hasAuthority('USER')")
+    public String getOrderPage(org.springframework.ui.Model model, @PathVariable(value = "id") long id){
+        Auto auto = autoService.getAutoById(id);
+        model.addAttribute("auto", auto);
+        return "order_page";
+    }
+
+    @PostMapping("/ordersave")
+    @PreAuthorize("hasAuthority('USER')")
+    public String saveOrder(@RequestParam(value = "user") String username,
+                            @RequestParam(value = "auto") long autoId,
+                            @RequestParam(value = "phone") String phone,
+                            @RequestParam(value = "email") String email,
+                            @RequestParam(value = "firstName") String fName,
+                            @RequestParam(value = "lastName") String lName
+                            ){
+        orderService.saveOrder(autoId, username, phone, email, lName, fName);
+        return "redirect:/";
+    }
+
 }

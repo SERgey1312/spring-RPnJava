@@ -44,9 +44,16 @@
         </option>
     </select><br>
 
+    <label for="colorAuto">Color:</label><br>
+    <input id="colorAuto" type="text" th:field="*{color}" placeholder="Input color" class="selectCeil"><br>
+
+    <label for="mileageAuto">Mileage:</label><br>
+    <input id="mileageAuto" type="text" th:field="*{mileage}" placeholder="Input mileage" class="selectCeil"><br>
+
     <input type="submit" value="Edit Auto!" class="btn btn-outline-dark my-2 my-sm-0">
 </form>
 <th:block th:insert="bootstrapjs.html"></th:block>
 <script src="../static/js/modelsDependMark.js" th:src="@{/js/modelsDependMark.js}"></script>
 </body>
+<footer th:replace="footer.html ::footer"></footer>
 </html>
